@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'station_list_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,7 +57,15 @@ class seatSelectBox extends StatelessWidget {
                     fontSize: 16,
                     fontWeight: FontWeight.bold)),
               ),
-              Text('선택', style: (TextStyle(fontSize: 40)))
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => StationListPage(title: '출발역')),
+                    );
+                  },
+                  child: Text('선택', style: (TextStyle(fontSize: 40))))
             ]),
             SizedBox(
               height: 50,
@@ -74,7 +83,15 @@ class seatSelectBox extends StatelessWidget {
                     fontSize: 16,
                     fontWeight: FontWeight.bold)),
               ),
-              Text('선택', style: (TextStyle(fontSize: 40)))
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => StationListPage(title: '도착역')),
+                    );
+                  },
+                  child: Text('선택', style: (TextStyle(fontSize: 40))))
             ]),
           ],
         ));
