@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_train_app/seat_page.dart';
 import 'station_list_page.dart';
 
 void main() {
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: HomePage(),
     );
   }
@@ -103,25 +104,33 @@ class seatSelectBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          miniSelectBox(
-            title: '출발역',
-            station: departureStation,
-            onTap: onDepartureTap,
-          ),
-          const SizedBox(
-            height: 50,
-            child: VerticalDivider(
-              width: 50,
-              thickness: 2,
-              color: Colors.grey,
+          Expanded(
+            flex: 2,
+            child: miniSelectBox(
+              title: '출발역',
+              station: departureStation,
+              onTap: onDepartureTap,
             ),
           ),
-          miniSelectBox(
-            title: '도착역',
-            station: arrivalStation,
-            onTap: onArrivalTap,
+          const Flexible(
+            flex: 1,
+            child: SizedBox(
+              height: 50,
+              child: VerticalDivider(
+                width: 50,
+                thickness: 2,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: miniSelectBox(
+              title: '도착역',
+              station: arrivalStation,
+              onTap: onArrivalTap,
+            ),
           ),
         ],
       ),
@@ -172,7 +181,12 @@ class seatSelectButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => (SeatPage())),
+          );
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.purple,
           shape: RoundedRectangleBorder(
