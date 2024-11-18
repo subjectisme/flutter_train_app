@@ -2,6 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SeatPage extends StatefulWidget {
+  final String departureStation;
+  final String arrivalStation;
+
+  const SeatPage({
+    super.key,
+    required this.departureStation,
+    required this.arrivalStation,
+  });
+
   @override
   State<SeatPage> createState() => _SeatPageState();
 }
@@ -22,7 +31,7 @@ class _SeatPageState extends State<SeatPage> {
                 Expanded(
                   flex: 2,
                   child: Text(
-                    '수서',
+                    widget.departureStation,
                     style: TextStyle(
                       color: Colors.purple,
                       fontSize: 30,
@@ -41,7 +50,7 @@ class _SeatPageState extends State<SeatPage> {
                 Expanded(
                   flex: 2,
                   child: Text(
-                    '부산',
+                    widget.arrivalStation,
                     style: TextStyle(
                       color: Colors.purple,
                       fontSize: 30,
