@@ -21,7 +21,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -73,7 +73,10 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             const SizedBox(height: 20),
-            seatSelectButton(),
+            SeatSelectButton(
+              departureStation: departureStation,
+              arrivalStation: arrivalStation,
+            ),
           ],
         ),
       ),
@@ -105,6 +108,7 @@ class seatSelectBox extends StatelessWidget {
       ),
       child: Row(
         children: [
+          const SizedBox(width: 13),
           Expanded(
             flex: 2,
             child: miniSelectBox(
@@ -157,17 +161,23 @@ class miniSelectBox extends StatelessWidget {
       children: [
         Text(
           title,
+          textAlign: TextAlign.center,
           style: const TextStyle(
             color: Colors.grey,
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
+        SizedBox(height: 8), // 제목과 역 이름 사이의 간격
         GestureDetector(
           onTap: onTap,
-          child: Text(
-            station ?? '선택',
-            style: const TextStyle(fontSize: 40),
+          child: Container(
+            width: double.infinity,
+            child: Text(
+              station ?? '선택',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 40),
+            ),
           ),
         ),
       ],
@@ -175,25 +185,47 @@ class miniSelectBox extends StatelessWidget {
   }
 }
 
-class seatSelectButton extends StatelessWidget {
+// home_page.dart 파일 내 SeatSelectButton 클래스 수정
+class SeatSelectButton extends StatelessWidget {
+  final String? departureStation;
+  final String? arrivalStation;
+
+  const SeatSelectButton({
+    Key? key,
+    required this.departureStation,
+    required this.arrivalStation,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    bool isEnabled = departureStation != null &&
+        arrivalStation != null &&
+        departureStation!.isNotEmpty &&
+        arrivalStation!.isNotEmpty;
+
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => (SeatPage())),
-          );
-        },
+        onPressed: isEnabled
+            ? () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SeatPage(
+                      departureStation: departureStation!,
+                      arrivalStation: arrivalStation!,
+                    ),
+                  ),
+                );
+              }
+            : null, // null이면 버튼이 비활성화됩니다.
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.purple,
+          backgroundColor: isEnabled ? Colors.purple : Colors.grey,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
         ),
-        child: const Text(
+        child: Text(
           '좌석 선택',
           style: TextStyle(
             color: Colors.white,
