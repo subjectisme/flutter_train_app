@@ -117,47 +117,51 @@ class _SeatPageState extends State<SeatPage> {
             //예매하기 버튼
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
-                onPressed: selectedSeat != null
-                    ? () {
-                        showCupertinoDialog(
-                          context: context,
-                          builder: (BuildContext context) =>
-                              CupertinoAlertDialog(
-                            title: Text('예매 하시겠습니까?'),
-                            content: Text('좌석 : $selectedSeat'),
-                            actions: <Widget>[
-                              CupertinoDialogAction(
-                                child: Text('취소'),
-                                onPressed: () {
-                                  Navigator.of(context).pop(); // Dialog 제거
-                                },
-                              ),
-                              CupertinoDialogAction(
-                                child: Text('확인'),
-                                onPressed: () {
-                                  Navigator.of(context).pop(); // Dialog 제거
-                                  Navigator.of(context).popUntil(
-                                      (route) => route.isFirst); // HomePage로 이동
-                                },
-                              ),
-                            ],
-                          ),
-                        );
-                      }
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ElevatedButton(
+                  onPressed: selectedSeat != null
+                      ? () {
+                          showCupertinoDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                CupertinoAlertDialog(
+                              title: Text('예매 하시겠습니까?'),
+                              content: Text('좌석 : $selectedSeat'),
+                              actions: <Widget>[
+                                CupertinoDialogAction(
+                                  child: Text('취소'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop(); // Dialog 제거
+                                  },
+                                ),
+                                CupertinoDialogAction(
+                                  child: Text('확인'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop(); // Dialog 제거
+                                    Navigator.of(context).popUntil((route) =>
+                                        route.isFirst); // HomePage로 이동
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+                      : null,
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(double.infinity, 45),
+                    backgroundColor: Colors.purple,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
-                ),
-                child: const Text(
-                  '예매 하기',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                  child: const Text(
+                    '예매 하기',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),

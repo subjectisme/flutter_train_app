@@ -11,7 +11,36 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData.light().copyWith(
+        primaryColor: Colors.purple,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.purple,
+            foregroundColor: Colors.white,
+          ),
+        ),
+      ),
+      darkTheme: ThemeData.dark().copyWith(
+        primaryColor: Colors.purple,
+        scaffoldBackgroundColor: Colors.black,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.purple,
+            foregroundColor: Colors.white,
+          ),
+        ),
+      ),
+      themeMode: ThemeMode.light, // 시스템 설정에 따라 테마 변경
       home: HomePage(),
     );
   }
@@ -226,6 +255,7 @@ class SeatSelectButton extends StatelessWidget {
               }
             : null, // null이면 버튼이 비활성화됩니다.
         style: ElevatedButton.styleFrom(
+          minimumSize: const Size(double.infinity, 45),
           backgroundColor: isEnabled ? Colors.purple : Colors.grey,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),

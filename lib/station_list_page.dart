@@ -37,8 +37,8 @@ class StationListPage extends StatelessWidget {
       body: ListView.separated(
         itemCount: stations.length + 1,
         separatorBuilder: (context, index) => Divider(
-          color: Colors.grey,
-          height: 1,
+          color: Colors.grey[300],
+          height: 0.5,
         ),
         itemBuilder: (context, index) {
           if (index == stations.length) {
@@ -46,7 +46,8 @@ class StationListPage extends StatelessWidget {
             return Container();
           }
           return ListTile(
-            title: Text(stations[index]),
+            title: Text(stations[index],
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             onTap: () {
               Navigator.pop(context, stations[index]);
             },
