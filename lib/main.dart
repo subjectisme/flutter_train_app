@@ -47,8 +47,11 @@ class _HomePageState extends State<HomePage> {
                 final result = await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        StationListPage(title: '출발역', isDeparture: true),
+                    builder: (context) => StationListPage(
+                      title: '출발역',
+                      isDeparture: true,
+                      excludedStation: arrivalStation,
+                    ),
                   ),
                 );
                 if (result != null) {
@@ -61,8 +64,11 @@ class _HomePageState extends State<HomePage> {
                 final result = await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        StationListPage(title: '도착역', isDeparture: false),
+                    builder: (context) => StationListPage(
+                      title: '도착역',
+                      isDeparture: false,
+                      excludedStation: departureStation,
+                    ),
                   ),
                 );
                 if (result != null) {

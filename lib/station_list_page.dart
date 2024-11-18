@@ -3,29 +3,55 @@ import 'package:flutter/material.dart';
 class StationListPage extends StatelessWidget {
   final String title;
   final bool isDeparture;
-  const StationListPage(
-      {super.key, required this.title, this.isDeparture = true});
+  final String? excludedStation;
+
+  const StationListPage({
+    super.key,
+    required this.title,
+    required this.isDeparture,
+    this.excludedStation,
+  });
 
   @override
   Widget build(BuildContext context) {
+    List<String> stations = [
+      '수서',
+      '동탄',
+      '평택지제',
+      '천안아산',
+      '오송',
+      '대전',
+      '김천구미',
+      '동대구',
+      '경주',
+      '울산',
+      '부산'
+    ];
+
+    stations = stations.where((station) => station != excludedStation).toList();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Column(
-        children: const [
-          StationList(station: '수서'),
-          StationList(station: '동탄'),
-          StationList(station: '평택지제'),
-          StationList(station: '천안아산'),
-          StationList(station: '오송'),
-          StationList(station: '대전'),
-          StationList(station: '김천구미'),
-          StationList(station: '동대구'),
-          StationList(station: '경주'),
-          StationList(station: '울산'),
-          StationList(station: '부산'),
-        ],
+      body: ListView.separated(
+        itemCount: stations.length + 1,
+        separatorBuilder: (context, index) => Divider(
+          color: Colors.grey,
+          height: 1,
+        ),
+        itemBuilder: (context, index) {
+          if (index == stations.length) {
+            // 마지막 항목은 빈 컨테이너
+            return Container();
+          }
+          return ListTile(
+            title: Text(stations[index]),
+            onTap: () {
+              Navigator.pop(context, stations[index]);
+            },
+          );
+        },
       ),
     );
   }

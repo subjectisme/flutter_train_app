@@ -90,6 +90,7 @@ class _SeatPageState extends State<SeatPage> {
               const SizedBox(width: 4),
               const Text('선택안됨')
             ]),
+            const SizedBox(height: 20),
 
             Expanded(
               child: ListView(
