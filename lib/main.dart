@@ -12,35 +12,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.light().copyWith(
-        primaryColor: Colors.purple,
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.purple,
-            foregroundColor: Colors.white,
-          ),
-        ),
-      ),
-      darkTheme: ThemeData.dark().copyWith(
-        primaryColor: Colors.purple,
-        scaffoldBackgroundColor: Colors.black,
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.white,
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.purple,
-            foregroundColor: Colors.white,
-          ),
-        ),
-      ),
-      themeMode: ThemeMode.light, // 시스템 설정에 따라 테마 변경
       home: HomePage(),
     );
   }
@@ -69,7 +40,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            seatSelectBox(
+            SeatSelectBox(
               departureStation: departureStation,
               arrivalStation: arrivalStation,
               onDepartureTap: () async {
@@ -119,13 +90,13 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class seatSelectBox extends StatelessWidget {
+class SeatSelectBox extends StatelessWidget {
   final String? departureStation;
   final String? arrivalStation;
   final Function() onDepartureTap;
   final Function() onArrivalTap;
 
-  const seatSelectBox({
+  const SeatSelectBox({
     super.key,
     this.departureStation,
     this.arrivalStation,
@@ -146,7 +117,7 @@ class seatSelectBox extends StatelessWidget {
           const SizedBox(width: 13),
           Expanded(
             flex: 2,
-            child: miniSelectBox(
+            child: MiniSelectBox(
               title: '출발역',
               station: departureStation,
               onTap: onDepartureTap,
@@ -165,7 +136,7 @@ class seatSelectBox extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: miniSelectBox(
+            child: MiniSelectBox(
               title: '도착역',
               station: arrivalStation,
               onTap: onArrivalTap,
@@ -177,8 +148,8 @@ class seatSelectBox extends StatelessWidget {
   }
 }
 
-class miniSelectBox extends StatelessWidget {
-  const miniSelectBox({
+class MiniSelectBox extends StatelessWidget {
+  const MiniSelectBox({
     super.key,
     required this.title,
     required this.onTap,

@@ -134,9 +134,11 @@ class _SeatPageState extends State<SeatPage> {
                                   onPressed: () {
                                     Navigator.of(context).pop(); // Dialog 제거
                                   },
+                                  isDestructiveAction: true,
                                 ),
                                 CupertinoDialogAction(
-                                  child: Text('확인'),
+                                  child: Text('확인',
+                                      style: TextStyle(color: Colors.blue)),
                                   onPressed: () {
                                     Navigator.of(context).pop(); // Dialog 제거
                                     Navigator.of(context).popUntil((route) =>
